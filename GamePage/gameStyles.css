@@ -1,0 +1,87 @@
+header {
+    background-color: #3A4E48;
+    color: #BEB0A7;
+    border: 5px solid #6A7B76;
+    border-radius: 25px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: "Comfortaa", sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: #BEB0A7;
+    text-decoration: none;
+    transition-duration: 0.75s;
+    font-size: 200%;
+}
+
+nav a:hover {
+    color: #040303;
+}
+
+body{
+    font: "Comfortaa", sans-serif;
+    background-color: #8B9D83;
+}
+body .grid {
+    margin-top: 2%;
+}
+body .gridRow {
+    margin-bottom: 2%;
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    color: #BEB0A7;
+}
+body .cardContainer{
+    display: flex;
+    width: 100px;
+    height: 150px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+body .card {
+    position: relative;
+    width: 100px;
+    height: 150px;
+    outline: 5px solid #3A4E48;
+    border-radius: 2px;
+    font-size: 200%;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;   
+}
+body .cardFront{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background-image: url("cardBack.png");
+}
+body .cardBack{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background-color: #BEB0A7;
+}
+/*body .cardContainer:hover > .card {
+    transform: rotateY(180deg);
+}*/
