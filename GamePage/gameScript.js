@@ -1,21 +1,39 @@
 var cardPositionArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 var cardIDArray = ["card1", "card2", "card3", "card4", "card5", "card6", "card7", "card8", "card9", "card10", "card11", "card12", "card13", "card14", "card15", "card16"];
-var possibeCardValues = [1,2,3,4];
-var cardIMGArray = ["spadeFront.png","diamondFront.png","heartFront.png","clubFront.png"];
+var possibeCardValues = [1, 2, 3, 4, 5, 6, 7, 8];
+var cardIMGArray = ["spadeFront.png", "diamondFront.png", "heartFront.png", "clubFront.png", "hourGlassFront.png", "spiralFront.png", "targetFront.png", "starFront.png"];
 var cardValueArray = [];
 var waiting = false;
+var numGuesses = 0;
 function generateCards() {
     cardValueArray = [];
     for (let i = 0; i < cardIDArray.length; i++) {
         let randomNum = Math.floor(Math.random() * possibeCardValues.length);
         cardValueArray.push(possibeCardValues[randomNum]);
+        cardValueArray.push(possibeCardValues[randomNum]);
+        i++;
     }
+    randomizeCards();
+    setCardImages();
     console.log(cardValueArray);
+}
+function randomizeCards() {
+    for (let i = 0; i < cardIDArray.length; i++) {
+        let randomNum = Math.floor(Math.random() * cardIDArray.length);
+        let temp = cardValueArray[i];
+        cardValueArray[i] = cardValueArray[randomNum];
+        cardValueArray[randomNum] = temp;
+    }
+}
+function setCardImages() {
+    for (let i = 0; i < cardIDArray.length; i++) {
+        document.getElementById(cardIDArray[i]).getElementsByClassName("cardBack")[0].style.backgroundImage = "url('" + cardIMGArray[cardValueArray[i]--] + "')";
+    }
 }
 function flipCard(cardIDnum) {
     console.log(cardIDArray[cardIDnum]);
     console.log(cardPositionArray[cardIDnum]);
-    if(cardPositionArray[cardIDnum] != undefined){
+    if (cardPositionArray[cardIDnum] != undefined) {
         if (cardPositionArray[cardIDnum] == false && countFlippedCards() < 2) {
             document.getElementById(cardIDArray[cardIDnum]).style.transform = "rotateY(180deg)";
             cardPositionArray[cardIDnum] = true;
@@ -32,11 +50,11 @@ function flipCard(cardIDnum) {
 function countFlippedCards() {
     let flippedCards = 0;
     for (let i = 0; i < cardPositionArray.length; i++) {
-        if(cardPositionArray[i] != undefined){
+        if (cardPositionArray[i] != undefined) {
             if (cardPositionArray[i] == true) {
                 flippedCards++;
             }
-        }   
+        }
     }
     return flippedCards;
 }
@@ -63,16 +81,16 @@ function checkMatch() {
             }
         }
     }
-    console.log(flippedCardOne+" "+cardValueArray[indexOne]);
-    console.log(flippedCardTwo+" "+cardValueArray[indexTwo]);
+    console.log(flippedCardOne + " " + cardValueArray[indexOne]);
+    console.log(flippedCardTwo + " " + cardValueArray[indexTwo]);
     if (cardValueArray[indexOne] == cardValueArray[indexTwo]) {
-        /*logMatch(indexOne, indexTwo);*/
         document.getElementById(flippedCardOne).style.opacity = "0%";
         cardPositionArray[indexOne] = undefined;
         document.getElementById(flippedCardTwo).style.opacity = "0%"
         cardPositionArray[indexTwo] = undefined;
     }
     else {
+        numGuesses++;
         document.getElementById(flippedCardOne).style.transform = "rotateY(0deg)";
         cardPositionArray[indexOne] = false;
         document.getElementById(flippedCardTwo).style.transform = "rotateY(0deg)";
