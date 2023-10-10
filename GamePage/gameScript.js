@@ -1,6 +1,5 @@
 var cardPositionArray = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 var cardIDArray = ["card1", "card2", "card3", "card4", "card5", "card6", "card7", "card8", "card9", "card10", "card11", "card12", "card13", "card14", "card15", "card16"];
-var possibeCardValues = [1, 2, 3, 4, 5, 6, 7, 8];
 var cardIMGArray = ["spadeFront.png", "diamondFront.png", "heartFront.png", "clubFront.png", "hourGlassFront.png", "spiralFront.png", "targetFront.png", "starFront.png"];
 var cardValueArray = [];
 var waiting = false;
@@ -8,11 +7,12 @@ var numGuesses = 0;
 function generateCards() {
     cardValueArray = [];
     for (let i = 0; i < cardIDArray.length; i++) {
-        let randomNum = Math.floor(Math.random() * possibeCardValues.length);
-        cardValueArray.push(possibeCardValues[randomNum]);
-        cardValueArray.push(possibeCardValues[randomNum]);
+        let randomNum = Math.floor(Math.random() * 8);
+        cardValueArray.push(randomNum);
+        cardValueArray.push(randomNum);
         i++;
     }
+    console.log(cardValueArray);
     randomizeCards();
     setCardImages();
     console.log(cardValueArray);
@@ -26,8 +26,9 @@ function randomizeCards() {
     }
 }
 function setCardImages() {
+    console.log(cardValueArray);
     for (let i = 0; i < cardIDArray.length; i++) {
-        document.getElementById(cardIDArray[i]).getElementsByClassName("cardBack")[0].style.backgroundImage = "url('" + cardIMGArray[cardValueArray[i]--] + "')";
+        document.getElementById(cardIDArray[i]).getElementsByClassName("cardBack")[0].style.backgroundImage = "url('" + cardIMGArray[cardValueArray[i]] + "')";
     }
 }
 function flipCard(cardIDnum) {

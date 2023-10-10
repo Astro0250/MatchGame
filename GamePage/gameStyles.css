@@ -99,9 +99,9 @@ body .cardBack{
     transform: rotateY(180deg);
     background-color: #BEB0A7;
 }
-/*body .cardContainer:hover > .card {
+body .cardContainer:hover > .card {
     transform: rotateY(180deg);
-}*/
+}
 p{
     text-align: center;
     font-size: 150%;
