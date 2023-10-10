@@ -31,8 +31,6 @@ function setCardImages() {
     }
 }
 function flipCard(cardIDnum) {
-    console.log(cardIDArray[cardIDnum]);
-    console.log(cardPositionArray[cardIDnum]);
     if (cardPositionArray[cardIDnum] != undefined) {
         if (cardPositionArray[cardIDnum] == false && countFlippedCards() < 2) {
             document.getElementById(cardIDArray[cardIDnum]).style.transform = "rotateY(180deg)";
@@ -46,6 +44,16 @@ function flipCard(cardIDnum) {
             setTimeout(function () { checkMatch(); waiting = false; }, 1000);
         }
     }
+}
+function checkForWin() {
+    let allUndef = true;
+    let index = 0;
+    while(index<cardPositionArray.length){
+        allUndef = (cardPositionArray[index]==undefined)
+        if(!allUndef) index = cardPositionArray.length++;
+        index++;
+    }
+    if(allUndef) window.location.href = "win.html";
 }
 function countFlippedCards() {
     let flippedCards = 0;
@@ -81,13 +89,12 @@ function checkMatch() {
             }
         }
     }
-    console.log(flippedCardOne + " " + cardValueArray[indexOne]);
-    console.log(flippedCardTwo + " " + cardValueArray[indexTwo]);
     if (cardValueArray[indexOne] == cardValueArray[indexTwo]) {
         document.getElementById(flippedCardOne).style.opacity = "0%";
         cardPositionArray[indexOne] = undefined;
         document.getElementById(flippedCardTwo).style.opacity = "0%"
         cardPositionArray[indexTwo] = undefined;
+        checkForWin();
     }
     else {
         numGuesses++;
